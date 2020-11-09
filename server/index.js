@@ -9,6 +9,6 @@ app.use(express.static(path.resolve(__dirname, "../dist/static")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/api", router);
+app.use("/api", router);
 
 module.exports = app;
