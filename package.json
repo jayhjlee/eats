@@ -1,0 +1,27 @@
+{
+	"name": "eats",
+	"version": "1.0.0",
+	"description": "This is an application to save your favorite restaurant and also view your saved restraurants.",
+	"main": "index.js",
+	"dependencies": {
+		"express": "^4.17.1",
+		"path": "^0.12.7"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.6"
+	},
+	"scripts": {
+		"server": "nodemon server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jayhjlee/eats.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jayhjlee/eats/issues"
+	},
+	"homepage": "https://github.com/jayhjlee/eats#readme"
+}
