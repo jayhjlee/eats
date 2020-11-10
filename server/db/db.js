@@ -15,6 +15,6 @@ db.authenticate()
 	.then(() => {
 		console.log(`Database connection established at port ${DB_PORT}`);
 	})
-	.catch(() => console.error(err.message));
+	.catch(err => console.error(err.message));
 
 module.exports = db;

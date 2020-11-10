@@ -27,3 +27,13 @@ services:
     command: npm run server
     depends_on:
       - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    command: npm run dev
+    depends_on:
+      - backend
