@@ -25,6 +25,7 @@ router.post("/login", async (req, res) => {
 			},
 		});
 
+		// User found
 		if (user) {
 			const validPassword = bcrypt.compareSync(password, user.password);
 
@@ -59,6 +60,15 @@ router.post("/login", async (req, res) => {
 					},
 				});
 			}
+			// User not found
+		} else {
+			res.status(404).send({
+				isLoggedin: false,
+				msg: "Please enter correct username",
+				error: {
+					error: "User not found",
+				},
+			});
 		}
 	} catch (err) {
 		res.json(err);
