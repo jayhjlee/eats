@@ -15,6 +15,7 @@ router.get("/users", async (req, res) => {
 	}
 });
 
+// User Login
 router.post("/login", async (req, res) => {
 	const { username, password } = req.body;
 
@@ -96,6 +97,7 @@ router.post("/login", async (req, res) => {
 	}
 });
 
+// User Sign-up
 router.post("/signup", async (req, res) => {
 	const { username, password, email } = req.body;
 
@@ -149,42 +151,6 @@ router.post("/signup", async (req, res) => {
 				});
 			}
 		}
-
-		// if (username === existingUser.username) {
-		// 	res.status(400).send({
-		// 		isSuccess: false,
-		// 		msg: "Username already exists. Try different one.",
-		// 		error: {
-		// 			msg: "400 Bad Request",
-		// 		},
-		// 	});
-		// 	// email already exists.
-		// } else if (email === existingUser.email) {
-		// 	res.status(400).send({
-		// 		isSuccess: false,
-		// 		msg: "Email already exists. Please verify your email.",
-		// 		error: {
-		// 			msg: "400 Bad Request",
-		// 		},
-		// 	});
-		// 	// No duplicated username / email found.
-		// } else {
-		// 	const salt = bcrypt.genSaltSync(10);
-		// 	const hashedPassword = bcrypt.hashSync(password, salt);
-
-		// 	req.body.isActive = true;
-		// 	req.body.password = hashedPassword;
-
-		// 	const response = await User.create(req.body);
-
-		// 	if (response.data) {
-		// 		res.status(200).send({
-		// 			isSuccess: true,
-		// 			msg: "Welcome to Eats!",
-		// 			error: {},
-		// 		});
-		// 	}
-		// }
 	} catch (error) {
 		res.status(500).send({
 			isLoggedin: false,
@@ -192,10 +158,6 @@ router.post("/signup", async (req, res) => {
 			error: error,
 		});
 	}
-
-	// username already exists.
-
-	// console.log(response);
 });
 
 module.exports = router;
