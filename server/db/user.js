@@ -25,6 +25,16 @@ const User = db.define("user", {
 		type: DataTypes.STRING,
 		allowNull: false,
 	},
+	isActive: {
+		type: DataTypes.BOOLEAN,
+		allowNull: false,
+		defaultValue: true,
+	},
+	isAdmin: {
+		type: DataTypes.BOOLEAN,
+		allowNull: false,
+		defaultValue: false,
+	},
 	createdAt: {
 		type: DataTypes.DATE,
 		allowNull: false,
