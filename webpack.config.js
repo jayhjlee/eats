@@ -8,7 +8,7 @@ const inProduction = process.env.NODE_ENV === "production";
 module.exports = {
 	mode: "development",
 	context: path.join(__dirname, "./src"),
-	entry: ["@babel/polyfill", "./index.js"],
+	entry: ["@babel/polyfill"].concat(files.entries),
 	output: {
 		path: path.join(__dirname, "/dist/static/js"),
 		filename: "app.js",

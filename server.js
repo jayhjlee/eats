@@ -4,7 +4,7 @@ const seeds = require("./server/db/seed");
 
 const PORT = 8080;
 
-db.drop().then(() => {
+db.drop({ except: "user" }).then(() => {
 	console.log("All tables dropped");
 
 	db.sync({ alter: true }).then(() => {

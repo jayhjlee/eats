@@ -4,6 +4,7 @@
 	"description": "This is an application to save your favorite restaurant and also view your saved restraurants.",
 	"main": "index.js",
 	"dependencies": {
+		"axios": "^0.21.0",
 		"bcryptjs": "^2.4.3",
 		"express": "^4.17.1",
 		"path": "^0.12.7",
