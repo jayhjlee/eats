@@ -23,6 +23,11 @@ const Login = ({ username, password, handleChange, handleSubmit }) => {
 					/>
 					<Button action={handleSubmit} innerText="Login" />
 				</form>
+				<div className="sign-up py-1">
+					<p>
+						<a href="/sign-up">Don't have an account?</a>
+					</p>
+				</div>
 			</div>
 		</div>
 	);

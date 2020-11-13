@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Login from "./Login";
 import Sidebar from "./Sidebar";
+import Signup from "./Signup";
 
 import { signIn, fetchUser } from "../store/actions/user";
 
@@ -49,12 +50,23 @@ class Home extends Component {
 						<Sidebar />
 					</Router>
 				) : (
-					<Login
-						username={username}
-						password={password}
-						handleChange={this.handleChange}
-						handleSubmit={this.handleLogin}
-					/>
+					<Router>
+						<Switch>
+							<Route
+								exact
+								path="/"
+								render={() => (
+									<Login
+										username={username}
+										password={password}
+										handleChange={this.handleChange}
+										handleSubmit={this.handleLogin}
+									/>
+								)}
+							/>
+							<Route path="/sign-up" component={Signup} />
+						</Switch>
+					</Router>
 				)}
 			</section>
 		);
