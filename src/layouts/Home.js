@@ -11,12 +11,17 @@ import { signIn, fetchUser } from "../store/actions/user";
 class Home extends Component {
 	constructor(props) {
 		super(props);
+
 		this.handleLogin = this.handleLogin.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleSignup = this.handleSignup.bind(this);
 
 		this.state = {
 			username: "",
 			password: "",
+			firstName: "",
+			lastName: "",
+			email: "",
 		};
 	}
 
@@ -32,11 +37,26 @@ class Home extends Component {
 
 	handleLogin(e) {
 		e.preventDefault();
-		this.props.login(this.state);
+
+		const loginCredential = {
+			username: this.state.username,
+			password: this.state.password,
+		};
+
+		this.props.login(loginCredential);
+
 		this.setState({
 			username: "",
 			password: "",
 		});
+	}
+
+	handleSignup(e) {
+		e.preventDefault();
+
+		const signupInfo = this.state;
+
+		console.log(signupInfo);
 	}
 
 	render() {
@@ -64,7 +84,16 @@ class Home extends Component {
 									/>
 								)}
 							/>
-							<Route path="/sign-up" component={Signup} />
+							<Route
+								path="/sign-up"
+								render={() => (
+									<Signup
+										{...this.state}
+										handleChange={this.handleChange}
+										handleSubmit={this.handleSignup}
+									/>
+								)}
+							/>
 						</Switch>
 					</Router>
 				)}

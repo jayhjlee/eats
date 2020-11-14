@@ -1,60 +1,58 @@
-import React, { Component } from "react";
+import React from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
-class Signup extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			username: "",
-			password: "",
-			email: "",
-			firstName: "",
-			lastName: "",
-		};
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value,
-		});
-	}
-
-	handleSubmit(e) {
-		e.preventDefault();
-
-		console.log("Signup!");
-	}
-	render() {
-		const { username, password, email, firstName, lastName } = this.state;
-		return (
-			<div className="sign-up-form">
-				<div className="card">
-					<h2>Join Eats!</h2>
-					<form>
-						<Input
-							label="Username"
-							name="username"
-							action={this.handleChange}
-							value={username}
-						/>
-						<Input
-							label="Password"
-							type="password"
-							name="password"
-							action={this.handleChange}
-							value={password}
-						/>
-						<Button action={this.handleSubmit} innerText="Sign Up" />
-					</form>
-				</div>
+const Signup = ({
+	username,
+	password,
+	email,
+	firstName,
+	lastName,
+	handleChange,
+	handleSubmit,
+}) => {
+	return (
+		<div className="sign-up-form">
+			<div className="card">
+				<h2>Join Eats!</h2>
+				<form>
+					<Input
+						label="Username"
+						name="username"
+						action={handleChange}
+						value={username}
+					/>
+					<Input
+						label="Password"
+						type="password"
+						name="password"
+						action={handleChange}
+						value={password}
+					/>
+					<Input
+						label="Email"
+						type="email"
+						name="email"
+						action={handleChange}
+						value={email}
+					/>
+					<Input
+						label="First Name"
+						name="firstName"
+						action={handleChange}
+						value={firstName}
+					/>
+					<Input
+						label="Last Name"
+						name="lastName"
+						action={handleChange}
+						value={lastName}
+					/>
+					<Button action={handleSubmit} innerText="Sign Up" />
+				</form>
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 export default Signup;
