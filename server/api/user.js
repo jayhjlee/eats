@@ -141,9 +141,9 @@ router.post("/signup", async (req, res) => {
 			req.body.isActive = true;
 			req.body.password = hashedPassword;
 
-			const response = await User.create(req.body);
+			const newUser = await User.create(req.body);
 
-			if (response.data) {
+			if (newUser) {
 				res.status(200).send({
 					isSuccess: true,
 					msg: "Welcome to Eats!",

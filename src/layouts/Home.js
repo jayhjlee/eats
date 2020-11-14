@@ -6,7 +6,7 @@ import Login from "./Login";
 import Sidebar from "./Sidebar";
 import Signup from "./Signup";
 
-import { signIn, fetchUser } from "../store/actions/user";
+import { signIn, fetchUser, signUp } from "../store/actions/user";
 
 class Home extends Component {
 	constructor(props) {
@@ -56,7 +56,15 @@ class Home extends Component {
 
 		const signupInfo = this.state;
 
-		console.log(signupInfo);
+		this.props.signup(signupInfo);
+
+		this.setState({
+			username: "",
+			password: "",
+			firstName: "",
+			lastName: "",
+			email: "",
+		});
 	}
 
 	render() {
@@ -67,6 +75,11 @@ class Home extends Component {
 			<section>
 				{isLoggedIn && token && user ? (
 					<Router>
+						<Switch>
+							<Route exact path="/">
+								<Sidebar />
+							</Route>
+						</Switch>
 						<Sidebar />
 					</Router>
 				) : (
@@ -116,6 +129,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		loadUser: () => dispatch(fetchUser()),
 		login: credential => dispatch(signIn(credential)),
+		signup: newUser => dispatch(signUp(newUser)),
 	};
 };
 

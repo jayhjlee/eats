@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { logOut, fetchUser } from "../store/actions/user";
 
@@ -24,7 +25,10 @@ class Header extends Component {
 					<ul>
 						{username && token && isLoggedIn ? (
 							<li className="mx-1">
-								Welcome! {username} <a onClick={this.handleLogOut}>Logout</a>
+								Welcome! {username}{" "}
+								<a href="/" onClick={this.handleLogOut}>
+									Logout
+								</a>
 							</li>
 						) : null}
 					</ul>

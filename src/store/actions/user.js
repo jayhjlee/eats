@@ -22,6 +22,18 @@ export const signIn = credential => async dispatch => {
 	dispatch(validUser(data));
 };
 
+export const signUp = newUser => async dispatch => {
+	const res = await axios.post("/api/user/signup", newUser);
+	const { data } = res;
+
+	if (data.isSuccess) {
+		const { username, password } = newUser;
+		const userInfo = { username, password };
+
+		dispatch(signIn(userInfo));
+	}
+};
+
 export const logOut = () => dispatch => {
 	localStorage.removeItem("token");
 	localStorage.removeItem("isLoggedIn");
