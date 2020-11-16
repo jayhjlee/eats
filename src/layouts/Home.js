@@ -28,6 +28,7 @@ class Home extends Component {
 			firstName: "",
 			lastName: "",
 			email: "",
+			coordinates: [-74.0567, 40.7992],
 		};
 	}
 
@@ -84,7 +85,10 @@ class Home extends Component {
 					<Switch>
 						<Route exact path="/">
 							<Sidebar />
-							<MapWrapper {...this.props} />
+							<MapWrapper
+								{...this.props}
+								coordinates={this.state.coordinates}
+							/>
 						</Route>
 						<Route
 							path="/log-in"
@@ -117,12 +121,12 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-	const { isLoggedIn, token, username } = state.user;
+	const { isLoggedIn, token, user } = state.user;
 
 	return {
 		isLoggedIn,
 		token,
-		user: username,
+		user,
 	};
 };
 

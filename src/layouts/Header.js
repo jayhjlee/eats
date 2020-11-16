@@ -16,16 +16,17 @@ class Header extends Component {
 	}
 
 	render() {
-		const { username, token, isLoggedIn } = this.props;
+		const { user, token, isLoggedIn } = this.props;
 
 		return (
 			<section>
 				<nav className="navbar flex px-1">
 					<h1>Eats</h1>
 					<ul>
-						{username && token && isLoggedIn ? (
+						{user && token && isLoggedIn ? (
 							<li className="mx-1">
-								Welcome! {username} <a onClick={this.handleLogOut}>Logout</a>
+								Welcome! {user.username}{" "}
+								<a onClick={this.handleLogOut}>Logout</a>
 							</li>
 						) : null}
 					</ul>
@@ -36,10 +37,10 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => {
-	const { username, token, isLoggedIn } = state.user;
+	const { user, token, isLoggedIn } = state.user;
 
 	return {
-		username,
+		user,
 		token,
 		isLoggedIn,
 	};

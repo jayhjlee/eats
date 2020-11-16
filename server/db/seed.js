@@ -11,6 +11,7 @@ const seeds = () => {
 			firstName: "John",
 			lastName: "Doe",
 			email: "jdoe@gmail.com",
+			location: "Secaucus",
 		},
 		{
 			username: "ksmith",
@@ -18,6 +19,7 @@ const seeds = () => {
 			firstName: "Kate",
 			lastName: "Smith",
 			email: "ksmith@gmail.com",
+			location: "New York City",
 		},
 		{
 			username: "mdavis",
@@ -25,6 +27,7 @@ const seeds = () => {
 			firstName: "Mark",
 			lastName: "Davis",
 			email: "mdavis@gmail.com",
+			location: "San Francisco",
 		},
 	];
 

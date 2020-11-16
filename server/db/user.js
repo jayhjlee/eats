@@ -25,6 +25,10 @@ const User = db.define("user", {
 		type: DataTypes.STRING,
 		allowNull: false,
 	},
+	location: {
+		type: DataTypes.STRING,
+		allowNull: false,
+	},
 	isActive: {
 		type: DataTypes.BOOLEAN,
 		allowNull: false,

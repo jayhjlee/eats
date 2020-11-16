@@ -24,7 +24,7 @@ router.post("/login", async (req, res) => {
 			where: {
 				username,
 			},
-			attributes: ["username", "isActive", "password"],
+			attributes: ["username", "isActive", "password", "location"],
 			raw: true,
 		});
 
@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
 								}
 
 								res.status(200).send({
-									username,
+									user,
 									isLoggedIn: true,
 									msg: "Successfully logged in",
 									token,

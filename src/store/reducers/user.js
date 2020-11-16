@@ -3,7 +3,7 @@ import { LOGGED_IN, LOGGED_OUT } from "../types/user";
 const initialState = {
 	isLoggedIn: false,
 	token: null,
-	username: "",
+	user: null,
 };
 
 export default function (state = initialState, action) {
@@ -13,14 +13,14 @@ export default function (state = initialState, action) {
 				...state,
 				isLoggedIn: action.payload.isLoggedIn,
 				token: action.payload.token,
-				username: action.payload.username,
+				user: action.payload.user,
 			};
 		case LOGGED_OUT:
 			return {
 				...state,
 				isLoggedIn: false,
 				token: null,
-				username: "",
+				user: null,
 			};
 		default:
 			return state;
