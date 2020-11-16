@@ -6,9 +6,9 @@ const gotUser = data => ({ type: LOGGED_IN, payload: data });
 const logOutUser = () => ({ type: LOGGED_OUT });
 
 export const fetchUser = () => dispatch => {
-	const { isLoggedIn, username, token } = localStorage;
+	const { isLoggedIn, user, token } = localStorage;
 
-	dispatch(gotUser({ isLoggedIn, username, token }));
+	dispatch(gotUser({ isLoggedIn, user, token }));
 };
 
 export const signIn = credential => async dispatch => {
@@ -17,7 +17,7 @@ export const signIn = credential => async dispatch => {
 
 	localStorage.setItem("token", data.token);
 	localStorage.setItem("isLoggedIn", data.isLoggedIn);
-	localStorage.setItem("username", data.username);
+	localStorage.setItem("user", data.user);
 
 	dispatch(validUser(data));
 };
@@ -37,7 +37,7 @@ export const signUp = newUser => async dispatch => {
 export const logOut = () => dispatch => {
 	localStorage.removeItem("token");
 	localStorage.removeItem("isLoggedIn");
-	localStorage.removeItem("username");
+	localStorage.removeItem("user");
 
 	dispatch(logOutUser());
 };

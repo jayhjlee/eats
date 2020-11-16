@@ -8,6 +8,7 @@
 		"bcryptjs": "^2.4.3",
 		"express": "^4.17.1",
 		"jsonwebtoken": "^8.5.1",
+		"mapbox-gl": "^1.12.0",
 		"path": "^0.12.7",
 		"pg": "^8.4.2",
 		"react": "^17.0.1",
@@ -48,6 +49,18 @@
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/jayhjlee/eats/issues"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	},
 	"homepage": "https://github.com/jayhjlee/eats#readme"
 }
