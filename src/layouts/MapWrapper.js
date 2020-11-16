@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
+
 import secrets from "../../secrets";
+
+import { fetchPlaces } from "../store/actions/places";
 
 mapboxgl.accessToken = secrets.mapBoxKey;
 
@@ -11,6 +15,7 @@ class MapWrapper extends Component {
 		this.map = React.createRef();
 
 		this.state = {
+			restaurants: [],
 			coordinates: [-74.0567, 40.7992],
 		};
 	}
@@ -35,6 +40,8 @@ class MapWrapper extends Component {
 				});
 			});
 		}
+
+		this.props.fetchRestaurants(this.props.user.location);
 	}
 
 	render() {
@@ -49,4 +56,18 @@ class MapWrapper extends Component {
 	}
 }
 
-export default MapWrapper;
+const mapStateToProps = state => {
+	const { restaurants } = state.places;
+
+	return {
+		restaurants,
+	};
+};
+
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchRestaurants: location => dispatch(fetchPlaces(location)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapWrapper);

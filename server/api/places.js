@@ -3,25 +3,23 @@ const axios = require("axios");
 const secrets = require("../../secrets");
 
 router.get("/restaurants/location", async (req, res) => {
-	const { apiKey } = secrets;
-	const { location, limit } = req.query;
-
-	let numOfRestaurants = limit;
-
-	if (!numOfRestaurants) {
-		numOfRestaurants = 20;
-	}
-
 	try {
+		const { apiKey } = secrets;
+		const { city, limit } = req.query;
+
+		let numOfRestaurants = limit;
+
+		if (!numOfRestaurants) {
+			numOfRestaurants = 20;
+		}
 		const response = await axios.get(
-			`https://api.yelp.com/v3/businesses/search?location=${location}&limit=${numOfRestaurants}`,
+			`https://api.yelp.com/v3/businesses/search?location=${city}&limit=${numOfRestaurants}`,
 			{
 				headers: {
 					Authorization: `Bearer ${apiKey}`,
 				},
 			}
 		);
-
 		res.json(response.data);
 	} catch (err) {
 		res.json(err);
