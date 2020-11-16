@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
@@ -8,9 +9,14 @@ const Signup = ({
 	email,
 	firstName,
 	lastName,
+	user,
+	token,
+	isLoggedIn,
 	handleChange,
 	handleSubmit,
 }) => {
+	if (isLoggedIn && token && user) return <Redirect to="/" />;
+
 	return (
 		<div className="sign-up-form">
 			<div className="card">

@@ -11,7 +11,7 @@ export default function (state = initialState, action) {
 		case LOGGED_IN:
 			return {
 				...state,
-				isLoggedIn: action.payload.isLoggedin,
+				isLoggedIn: action.payload.isLoggedIn,
 				token: action.payload.token,
 				username: action.payload.username,
 			};

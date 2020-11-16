@@ -1,8 +1,18 @@
 import React from "react";
+import { Link, Redirect } from "react-router-dom";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
-const Login = ({ username, password, handleChange, handleSubmit }) => {
+const Login = ({
+	username,
+	password,
+	handleChange,
+	handleSubmit,
+	token,
+	user,
+	isLoggedIn,
+}) => {
+	if (isLoggedIn && user && token) return <Redirect to="/" />;
 	return (
 		<div className="login-form">
 			<div className="card">
@@ -25,7 +35,7 @@ const Login = ({ username, password, handleChange, handleSubmit }) => {
 				</form>
 				<div className="sign-up py-1">
 					<p className="sign-up-question">
-						Don't have an account? <a href="/sign-up">Join Eats!</a>
+						Don't have an account? <Link to="/sign-up">Join Eats!</Link>
 					</p>
 				</div>
 			</div>

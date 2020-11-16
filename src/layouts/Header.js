@@ -25,10 +25,7 @@ class Header extends Component {
 					<ul>
 						{username && token && isLoggedIn ? (
 							<li className="mx-1">
-								Welcome! {username}{" "}
-								<a href="/" onClick={this.handleLogOut}>
-									Logout
-								</a>
+								Welcome! {username} <a onClick={this.handleLogOut}>Logout</a>
 							</li>
 						) : null}
 					</ul>

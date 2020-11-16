@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
 							(err, token) => {
 								if (err) {
 									res.status(500).send({
-										isLoggedin: false,
+										isLoggedIn: false,
 										msg: "Server error",
 										error: err,
 									});
@@ -50,7 +50,7 @@ router.post("/login", async (req, res) => {
 
 								res.status(200).send({
 									username,
-									isLoggedin: true,
+									isLoggedIn: true,
 									msg: "Successfully logged in",
 									token,
 									error: {},
@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
 						);
 					} else {
 						res.status(401).send({
-							isLoggedin: false,
+							isLoggedIn: false,
 							msg: "Please enter valid password",
 							error: {
 								error: "Unauthorized access",
@@ -69,7 +69,7 @@ router.post("/login", async (req, res) => {
 					// User is inactive.
 				} else {
 					res.status(401).send({
-						isLoggedin: false,
+						isLoggedIn: false,
 						msg: "You are deactivated. Please contact customer support",
 						error: {
 							error: "401 Unauthorized access",
@@ -81,7 +81,7 @@ router.post("/login", async (req, res) => {
 			// User is not found.
 		} else {
 			res.status(404).send({
-				isLoggedin: false,
+				isLoggedIn: false,
 				msg: "Please enter correct username",
 				error: {
 					error: "User not found",
@@ -90,7 +90,7 @@ router.post("/login", async (req, res) => {
 		}
 	} catch (err) {
 		res.status(500).send({
-			isLoggedin: false,
+			isLoggedIn: false,
 			msg: "Server error",
 			error: err,
 		});
@@ -153,7 +153,7 @@ router.post("/signup", async (req, res) => {
 		}
 	} catch (error) {
 		res.status(500).send({
-			isLoggedin: false,
+			isLoggedIn: false,
 			msg: "Server error",
 			error: error,
 		});

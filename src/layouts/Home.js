@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from "react-router-dom";
 
 import Login from "./Login";
 import Sidebar from "./Sidebar";
 import Signup from "./Signup";
+import MapWrapper from "./MapWrapper";
 
 import { signIn, fetchUser, signUp } from "../store/actions/user";
 
@@ -49,6 +55,8 @@ class Home extends Component {
 			username: "",
 			password: "",
 		});
+
+		return <Redirect to="/" />;
 	}
 
 	handleSignup(e) {
@@ -69,47 +77,40 @@ class Home extends Component {
 
 	render() {
 		const { username, password } = this.state;
-		const { isLoggedIn, token, user } = this.props;
 
 		return (
 			<section>
-				{isLoggedIn && token && user ? (
-					<Router>
-						<Switch>
-							<Route exact path="/">
-								<Sidebar />
-							</Route>
-						</Switch>
-						<Sidebar />
-					</Router>
-				) : (
-					<Router>
-						<Switch>
-							<Route
-								exact
-								path="/"
-								render={() => (
-									<Login
-										username={username}
-										password={password}
-										handleChange={this.handleChange}
-										handleSubmit={this.handleLogin}
-									/>
-								)}
-							/>
-							<Route
-								path="/sign-up"
-								render={() => (
-									<Signup
-										{...this.state}
-										handleChange={this.handleChange}
-										handleSubmit={this.handleSignup}
-									/>
-								)}
-							/>
-						</Switch>
-					</Router>
-				)}
+				<Router>
+					<Switch>
+						<Route exact path="/">
+							<Sidebar />
+							<MapWrapper {...this.props} />
+						</Route>
+						<Route
+							path="/log-in"
+							render={() => (
+								<Login
+									username={username}
+									password={password}
+									{...this.props}
+									handleChange={this.handleChange}
+									handleSubmit={this.handleLogin}
+								/>
+							)}
+						/>
+						<Route
+							path="/sign-up"
+							render={() => (
+								<Signup
+									{...this.state}
+									{...this.props}
+									handleChange={this.handleChange}
+									handleSubmit={this.handleSignup}
+								/>
+							)}
+						/>
+					</Switch>
+				</Router>
 			</section>
 		);
 	}

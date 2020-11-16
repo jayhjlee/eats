@@ -16,7 +16,7 @@ export const signIn = credential => async dispatch => {
 	const { data } = res;
 
 	localStorage.setItem("token", data.token);
-	localStorage.setItem("isLoggedIn", data.isLoggedin);
+	localStorage.setItem("isLoggedIn", data.isLoggedIn);
 	localStorage.setItem("username", data.username);
 
 	dispatch(validUser(data));
