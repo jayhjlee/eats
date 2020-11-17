@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
 		} else {
 			res.status(404).send({
 				isLoggedIn: false,
-				msg: "Please enter correct username",
+				msg: "Please enter correct username / password",
 				error: {
 					error: "User not found",
 				},

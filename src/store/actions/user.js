@@ -1,9 +1,11 @@
 import axios from "axios";
 import { LOGGED_IN, LOGGED_OUT } from "../types/user";
+import { GET_ERRORS } from "../types/errors";
 
 const validUser = data => ({ type: LOGGED_IN, payload: data });
 const gotUser = data => ({ type: LOGGED_IN, payload: data });
 const logOutUser = () => ({ type: LOGGED_OUT });
+const isUserFound = data => ({ type: GET_ERRORS, payload: data });
 
 export const fetchUser = () => dispatch => {
 	const { isLoggedIn, user, token } = localStorage;
@@ -12,14 +14,21 @@ export const fetchUser = () => dispatch => {
 };
 
 export const signIn = credential => async dispatch => {
-	const res = await axios.post("/api/user/login", credential);
-	const { data } = res;
+	try {
+		const res = await axios.post("/api/user/login", credential);
+		const { data } = res;
 
-	localStorage.setItem("token", data.token);
-	localStorage.setItem("isLoggedIn", data.isLoggedIn);
-	localStorage.setItem("user", data.user);
+		localStorage.setItem("token", data.token);
+		localStorage.setItem("isLoggedIn", data.isLoggedIn);
+		localStorage.setItem("user", data.user);
 
-	dispatch(validUser(data));
+		dispatch(validUser(data));
+	} catch (err) {
+		const { data, status } = err.response;
+		const errors = { msg: data.msg, status };
+
+		dispatch(isUserFound(errors));
+	}
 };
 
 export const signUp = newUser => async dispatch => {
