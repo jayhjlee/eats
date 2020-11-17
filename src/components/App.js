@@ -13,6 +13,7 @@ import Alerts from "./Alerts";
 const alertOptions = {
 	timeout: 3000,
 	position: "top center",
+	offset: "50px",
 };
 
 class App extends Component {

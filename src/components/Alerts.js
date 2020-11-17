@@ -3,11 +3,19 @@ import { withAlert } from "react-alert";
 import { connect } from "react-redux";
 
 class Alerts extends Component {
-	componentDidUpdate(prevProps) {
-		const { errors } = this.props;
+	componentDidUpdate() {
+		const { errors, messages } = this.props;
 
-		if (errors.status !== null && errors.status !== 200) {
-			this.props.alert.error(errors.msg);
+		if (errors.status) {
+			if (errors.status !== 200) {
+				this.props.alert.error(errors.msg);
+			}
+		}
+
+		if (messages.status) {
+			if (messages.status === 200) {
+				this.props.alert.success(messages.msg);
+			}
 		}
 	}
 
@@ -17,10 +25,10 @@ class Alerts extends Component {
 }
 
 const mapStateToProps = state => {
-	const { errors } = state;
+	const { errors, messages } = state;
 	const { msg } = state.user;
 
-	return { msg, errors };
+	return { msg, errors, messages };
 };
 
 export default connect(mapStateToProps, null)(withAlert()(Alerts));
