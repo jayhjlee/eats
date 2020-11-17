@@ -78,6 +78,7 @@ class Home extends Component {
 
 	render() {
 		const { username, password } = this.state;
+		const { user, isLoggedIn, token } = this.props;
 
 		return (
 			<section>
@@ -86,7 +87,9 @@ class Home extends Component {
 						<Route exact path="/">
 							<Sidebar />
 							<MapWrapper
-								{...this.props}
+								user={user}
+								isLoggedIn={isLoggedIn}
+								token={token}
 								coordinates={this.state.coordinates}
 							/>
 						</Route>

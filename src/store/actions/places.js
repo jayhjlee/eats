@@ -11,6 +11,8 @@ export const fetchPlaces = location => async dispatch => {
 		const { data } = res;
 
 		console.log(data);
+
+		dispatch(gotPlaces(data.businesses));
 	} catch (err) {
 		console.error(err);
 	}

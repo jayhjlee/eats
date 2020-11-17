@@ -1,4 +1,4 @@
-import { FETCH_RESTAURANTS } from "../types/places";
+import { FETCH_PLACES } from "../types/places";
 
 const initialState = {
 	restaurants: [],
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
 	switch (action.type) {
-		case FETCH_RESTAURANTS:
+		case FETCH_PLACES:
 			return {
 				...state,
 				restaurants: action.payload,

@@ -35,13 +35,15 @@ class MapWrapper extends Component {
 				const lng = position.coords.longitude;
 				const lat = position.coords.latitude;
 
+				this.props.fetchRestaurants(this.props.user.location);
+				const { restaurants } = this.props;
+
 				this.setState({
 					coordinates: [lng, lat],
+					restaurants,
 				});
 			});
 		}
-
-		this.props.fetchRestaurants(this.props.user.location);
 	}
 
 	render() {
