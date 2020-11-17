@@ -26,6 +26,7 @@ module.exports = {
 			},
 		],
 	},
+	devtool: "source-map",
 	plugins: [new CleanWebpackPlugin()],
 	watch: true,
 	optimization: {

@@ -1,9 +1,14 @@
 import axios from "axios";
 import { LOGGED_IN, LOGGED_OUT } from "../types/user";
+import { GET_ERRORS } from "../types/errors";
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../types/messages";
 
 const validUser = data => ({ type: LOGGED_IN, payload: data });
 const gotUser = data => ({ type: LOGGED_IN, payload: data });
 const logOutUser = () => ({ type: LOGGED_OUT });
+const loginFailed = data => ({ type: GET_ERRORS, payload: data });
+const loginSuccess = data => ({ type: LOGIN_SUCCESS, payload: data });
+const logOutSuccess = data => ({ type: LOGOUT_SUCCESS });
 
 export const fetchUser = () => dispatch => {
 	const { isLoggedIn, user, token } = localStorage;
@@ -12,14 +17,24 @@ export const fetchUser = () => dispatch => {
 };
 
 export const signIn = credential => async dispatch => {
-	const res = await axios.post("/api/user/login", credential);
-	const { data } = res;
+	try {
+		const res = await axios.post("/api/user/login", credential);
 
-	localStorage.setItem("token", data.token);
-	localStorage.setItem("isLoggedIn", data.isLoggedIn);
-	localStorage.setItem("user", data.user);
+		const { data, status } = res;
+		const message = { msg: data.msg, status };
 
-	dispatch(validUser(data));
+		localStorage.setItem("token", data.token);
+		localStorage.setItem("isLoggedIn", data.isLoggedIn);
+		localStorage.setItem("user", data.user);
+
+		dispatch(validUser(data));
+		dispatch(loginSuccess(message));
+	} catch (err) {
+		const { data, status } = err.response;
+		const errors = { msg: data.msg, status };
+
+		dispatch(loginFailed(errors));
+	}
 };
 
 export const signUp = newUser => async dispatch => {
@@ -40,4 +55,5 @@ export const logOut = () => dispatch => {
 	localStorage.removeItem("user");
 
 	dispatch(logOutUser());
+	dispatch(logOutSuccess());
 };

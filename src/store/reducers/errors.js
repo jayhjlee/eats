@@ -1,15 +1,17 @@
-import { FETCH_PLACES } from "../types/places";
+import { GET_ERRORS } from "../types/errors";
 
 const initialState = {
-	restaurants: [],
+	msg: "",
+	status: null,
 };
 
 export default function (state = initialState, action) {
 	switch (action.type) {
-		case FETCH_PLACES:
+		case GET_ERRORS:
 			return {
 				...state,
-				restaurants: action.payload,
+				msg: action.payload.msg,
+				status: action.payload.status,
 			};
 		default:
 			return state;

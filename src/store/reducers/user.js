@@ -4,6 +4,7 @@ const initialState = {
 	isLoggedIn: false,
 	token: null,
 	user: null,
+	msg: "",
 };
 
 export default function (state = initialState, action) {
@@ -14,6 +15,7 @@ export default function (state = initialState, action) {
 				isLoggedIn: action.payload.isLoggedIn,
 				token: action.payload.token,
 				user: action.payload.user,
+				msg: action.payload.msg,
 			};
 		case LOGGED_OUT:
 			return {
@@ -21,6 +23,7 @@ export default function (state = initialState, action) {
 				isLoggedIn: false,
 				token: null,
 				user: null,
+				msg: "",
 			};
 		default:
 			return state;

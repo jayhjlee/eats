@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
 									});
 								}
 
-								res.status(200).send({
+								res.status(200).json({
 									user,
 									isLoggedIn: true,
 									msg: "Successfully logged in",
@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
 		} else {
 			res.status(404).send({
 				isLoggedIn: false,
-				msg: "Please enter correct username",
+				msg: "Please enter correct username / password",
 				error: {
 					error: "User not found",
 				},
