@@ -15,6 +15,7 @@ class MapWrapper extends Component {
 		this.map = React.createRef();
 
 		this.state = {
+			isLoaded: false,
 			restaurants: [],
 			coordinates: [-74.0567, 40.7992],
 		};
