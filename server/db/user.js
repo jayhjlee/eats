@@ -39,6 +39,10 @@ const User = db.define("user", {
 		allowNull: false,
 		defaultValue: false,
 	},
+	isLoggedIn: {
+		type: DataTypes.BOOLEAN,
+		allowNull: true,
+	},
 	createdAt: {
 		type: DataTypes.DATE,
 		allowNull: false,
