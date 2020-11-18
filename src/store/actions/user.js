@@ -47,6 +47,9 @@ export const signUp = newUser => async dispatch => {
 
 		dispatch(signIn(userInfo));
 	}
+
+	// TODO
+	// Success / Error handling from server
 };
 
 export const logOut = () => dispatch => {
@@ -56,4 +59,7 @@ export const logOut = () => dispatch => {
 
 	dispatch(logOutUser());
 	dispatch(logOutSuccess("Log out successful"));
+
+	// TODO
+	// Success / Error handling from server
 };

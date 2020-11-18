@@ -36,6 +36,10 @@ class MapWrapper extends Component {
 				const lng = position.coords.longitude;
 				const lat = position.coords.latitude;
 
+				// TODO
+				// Do not call fetchRestaurants when the user is logged out.
+				// It throws 500 status code.
+
 				this.props.fetchRestaurants(this.props.user.location);
 				const { restaurants } = this.props;
 
