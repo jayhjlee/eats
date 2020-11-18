@@ -12,6 +12,7 @@ const seeds = () => {
 			lastName: "Doe",
 			email: "jdoe@gmail.com",
 			location: "Secaucus",
+			isLoggedIn: false,
 		},
 		{
 			username: "ksmith",
@@ -20,6 +21,7 @@ const seeds = () => {
 			lastName: "Smith",
 			email: "ksmith@gmail.com",
 			location: "New York City",
+			isLoggedIn: false,
 		},
 		{
 			username: "mdavis",
@@ -28,6 +30,7 @@ const seeds = () => {
 			lastName: "Davis",
 			email: "mdavis@gmail.com",
 			location: "San Francisco",
+			isLoggedIn: false,
 		},
 	];
 

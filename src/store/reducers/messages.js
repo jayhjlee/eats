@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
 		case LOGOUT_SUCCESS:
 			return {
 				...state,
-				msg: "",
+				msg: action.payload,
 				status: null,
 			};
 		default:

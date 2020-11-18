@@ -8,7 +8,7 @@ const gotUser = data => ({ type: LOGGED_IN, payload: data });
 const logOutUser = () => ({ type: LOGGED_OUT });
 const loginFailed = data => ({ type: GET_ERRORS, payload: data });
 const loginSuccess = data => ({ type: LOGIN_SUCCESS, payload: data });
-const logOutSuccess = data => ({ type: LOGOUT_SUCCESS });
+const logOutSuccess = msg => ({ type: LOGOUT_SUCCESS, payload: msg });
 
 export const fetchUser = () => dispatch => {
 	const { isLoggedIn, user, token } = localStorage;
@@ -55,5 +55,5 @@ export const logOut = () => dispatch => {
 	localStorage.removeItem("user");
 
 	dispatch(logOutUser());
-	dispatch(logOutSuccess());
+	dispatch(logOutSuccess("Log out successful"));
 };

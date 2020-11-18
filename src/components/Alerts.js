@@ -3,19 +3,17 @@ import { withAlert } from "react-alert";
 import { connect } from "react-redux";
 
 class Alerts extends Component {
-	componentDidUpdate() {
+	componentDidUpdate(prevProps) {
 		const { errors, messages } = this.props;
 
-		if (errors.status) {
-			if (errors.status !== 200) {
-				this.props.alert.error(errors.msg);
-			}
+		console.log("re-rendered");
+
+		if (prevProps.errors !== errors) {
+			this.props.alert.error(errors.msg);
 		}
 
-		if (messages.status) {
-			if (messages.status === 200) {
-				this.props.alert.success(messages.msg);
-			}
+		if (prevProps.messages !== messages) {
+			this.props.alert.success(messages.msg);
 		}
 	}
 
