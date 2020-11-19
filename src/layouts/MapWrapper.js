@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 
 import secrets from "../../secrets";
-
+import { fetchLocation } from "../store/actions/user";
 import { fetchPlaces } from "../store/actions/places";
 
 mapboxgl.accessToken = secrets.mapBoxKey;
@@ -17,38 +17,39 @@ class MapWrapper extends Component {
 		this.state = {
 			isLoaded: false,
 			restaurants: [],
-			coordinates: [-74.0567, 40.7992],
+			coordinates: [],
 		};
 	}
 
 	componentDidMount() {
-		this.map = new mapboxgl.Map({
-			container: "MapContainer",
-			style: "mapbox://styles/mapbox/streets-v11",
-			center: this.state.coordinates,
-			zoom: 15,
-		});
+		this.props.fetchRestaurants(this.props.user.location);
+		this.props.fetchLocation();
+	}
 
-		if (!navigator.geolocation) {
-			alert("Please allow location sharing");
-		} else {
-			navigator.geolocation.getCurrentPosition(position => {
-				const lng = position.coords.longitude;
-				const lat = position.coords.latitude;
+	componentDidUpdate(prevProps) {
+		const { coordinates, restaurants } = this.props;
+		const newCoordinates = [coordinates.lng, coordinates.lat];
 
-				// TODO
-				// Do not call fetchRestaurants when the user is logged out.
-				// It throws 500 status code.
+		if (newCoordinates[0] !== this.state.coordinates[0]) {
+			this.setState({
+				coordinates: newCoordinates,
+				restaurants,
+			});
 
-				this.props.fetchRestaurants(this.props.user.location);
-				const { restaurants } = this.props;
-
-				this.setState({
-					coordinates: [lng, lat],
-					restaurants,
-				});
+			this.map = new mapboxgl.Map({
+				container: "MapContainer",
+				style: "mapbox://styles/mapbox/streets-v11",
+				center: newCoordinates,
+				zoom: 15,
 			});
 		}
+		// console.log(this.state);
+		// const { coordinates } = prevProps;
+		// console.log(coordinates, this.props.coordinates);
+		// if (coordinates !== this.props.coordinates) {
+		// 	const newCoordinates = [coordinates.lng, coordinates.lat];
+
+		// }
 	}
 
 	render() {
@@ -64,9 +65,11 @@ class MapWrapper extends Component {
 }
 
 const mapStateToProps = state => {
+	const { coordinates } = state.user;
 	const { restaurants } = state.places;
 
 	return {
+		coordinates,
 		restaurants,
 	};
 };
@@ -74,6 +77,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchRestaurants: location => dispatch(fetchPlaces(location)),
+		fetchLocation: () => dispatch(fetchLocation()),
 	};
 };
 

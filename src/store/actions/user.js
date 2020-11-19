@@ -1,10 +1,11 @@
 import axios from "axios";
-import { LOGGED_IN, LOGGED_OUT } from "../types/user";
+import { LOGGED_IN, LOGGED_OUT, GOT_LOCATION } from "../types/user";
 import { GET_ERRORS } from "../types/errors";
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../types/messages";
 
 const validUser = data => ({ type: LOGGED_IN, payload: data });
 const gotUser = data => ({ type: LOGGED_IN, payload: data });
+const gotLocation = data => ({ type: GOT_LOCATION, payload: data });
 const logOutUser = () => ({ type: LOGGED_OUT });
 const loginFailed = data => ({ type: GET_ERRORS, payload: data });
 const loginSuccess = data => ({ type: LOGIN_SUCCESS, payload: data });
@@ -15,6 +16,14 @@ export const fetchUser = () => dispatch => {
 	const { isLoggedIn, user, token } = localStorage;
 
 	dispatch(gotUser({ isLoggedIn, user, token }));
+};
+
+// Fetching user's location.
+export const fetchLocation = () => async dispatch => {
+	const res = await axios.get("/api/user/user-location");
+	const { data } = res;
+
+	dispatch(gotLocation(data));
 };
 
 // Log in

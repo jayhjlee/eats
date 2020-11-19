@@ -32,7 +32,10 @@ router.get("/user-location", async (req, res) => {
 		const { data } = response;
 		const { latitude, longitude } = data;
 
-		res.json({ lat: latitude, lng: longitude });
+		const lat = parseFloat(latitude.toFixed(4));
+		const lng = parseFloat(longitude.toFixed(4));
+
+		res.json({ lat, lng });
 	} catch (err) {
 		console.error(err);
 	}
