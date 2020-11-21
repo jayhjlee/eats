@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 
 import secrets from "../../secrets";
-import { fetchLocation } from "../store/actions/user";
 import { fetchPlaces } from "../store/actions/places";
 
 mapboxgl.accessToken = secrets.mapBoxKey;
@@ -23,38 +22,30 @@ class MapWrapper extends Component {
 
 	componentDidMount() {
 		this.props.fetchRestaurants(this.props.user.location);
-		this.props.fetchLocation();
 	}
 
 	componentDidUpdate(prevProps) {
-		const { coordinates, restaurants } = this.props;
-		const newCoordinates = [coordinates.lng, coordinates.lat];
-
-		if (newCoordinates[0] !== this.state.coordinates[0]) {
+		if (prevProps.coordinates !== this.props.coordinates) {
+			const { coordinates, restaurants } = this.props;
 			this.setState({
-				coordinates: newCoordinates,
+				coordinates,
 				restaurants,
 			});
-
-			this.map = new mapboxgl.Map({
-				container: "MapContainer",
-				style: "mapbox://styles/mapbox/streets-v11",
-				center: newCoordinates,
-				zoom: 15,
-			});
 		}
-		// console.log(this.state);
-		// const { coordinates } = prevProps;
-		// console.log(coordinates, this.props.coordinates);
-		// if (coordinates !== this.props.coordinates) {
-		// 	const newCoordinates = [coordinates.lng, coordinates.lat];
-
-		// }
 	}
 
 	render() {
 		const { isLoggedIn, token, user } = this.props;
 		if (!isLoggedIn && !token && !user) return <Redirect to="/log-in" />;
+
+		if (this.state.coordinates.length) {
+			this.map = new mapboxgl.Map({
+				container: "MapContainer",
+				style: "mapbox://styles/mapbox/streets-v11",
+				center: this.state.coordinates,
+				zoom: 14,
+			});
+		}
 
 		return (
 			<section>
@@ -65,19 +56,17 @@ class MapWrapper extends Component {
 }
 
 const mapStateToProps = state => {
-	const { coordinates } = state.user;
-	const { restaurants } = state.places;
+	const { restaurants, coordinates } = state.places;
 
 	return {
-		coordinates,
 		restaurants,
+		coordinates,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchRestaurants: location => dispatch(fetchPlaces(location)),
-		fetchLocation: () => dispatch(fetchLocation()),
 	};
 };
 

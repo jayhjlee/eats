@@ -1,4 +1,4 @@
-import { LOGGED_IN, LOGGED_OUT, GOT_LOCATION } from "../types/user";
+import { LOGGED_IN, LOGGED_OUT } from "../types/user";
 
 const initialState = {
 	isLoggedIn: false,
@@ -17,11 +17,6 @@ export default function (state = initialState, action) {
 				token: action.payload.token,
 				user: action.payload.user,
 				msg: action.payload.msg,
-			};
-		case GOT_LOCATION:
-			return {
-				...state,
-				coordinates: action.payload,
 			};
 		case LOGGED_OUT:
 			return {

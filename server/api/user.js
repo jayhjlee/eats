@@ -1,11 +1,8 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const axios = require("axios");
-const interface = require("os").networkInterfaces();
 
 const User = require("../db/user");
-const secrets = require("../../secrets");
 
 const DATE = Date.now();
 
@@ -16,28 +13,6 @@ router.get("/users", async (req, res) => {
 		res.json(users);
 	} catch (err) {
 		res.json(err);
-	}
-});
-
-// Get user's location (coordinates).
-router.get("/user-location", async (req, res) => {
-	try {
-		const { geolocationAPIKey } = secrets;
-		const ip = interface.lo[0].address;
-
-		const response = await axios.get(
-			`http://api.ipstack.com/check?access_key=${geolocationAPIKey}`
-		);
-
-		const { data } = response;
-		const { latitude, longitude } = data;
-
-		const lat = parseFloat(latitude.toFixed(4));
-		const lng = parseFloat(longitude.toFixed(4));
-
-		res.json({ lat, lng });
-	} catch (err) {
-		console.error(err);
 	}
 });
 
