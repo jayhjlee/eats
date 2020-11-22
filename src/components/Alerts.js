@@ -6,8 +6,6 @@ class Alerts extends Component {
 	componentDidUpdate(prevProps) {
 		const { errors, messages } = this.props;
 
-		console.log("re-rendered");
-
 		if (prevProps.errors !== errors) {
 			this.props.alert.error(errors.msg);
 		}
