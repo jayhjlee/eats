@@ -43,13 +43,15 @@ class MapWrapper extends Component {
 				container: "MapContainer",
 				style: "mapbox://styles/mapbox/streets-v11",
 				center: this.state.coordinates,
-				zoom: 14,
+				zoom: 12,
 			});
 		}
 
 		return (
 			<section>
-				<div id="MapContainer" className="mapContainer" />
+				<div className="mapWrapper">
+					<div id="MapContainer" className="mapContainer" />
+				</div>
 			</section>
 		);
 	}
