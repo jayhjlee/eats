@@ -5,6 +5,7 @@ const initialState = {
 	token: null,
 	user: null,
 	msg: "",
+	coordinates: {},
 };
 
 export default function (state = initialState, action) {

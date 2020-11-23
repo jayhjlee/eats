@@ -10,12 +10,17 @@ const loginFailed = data => ({ type: GET_ERRORS, payload: data });
 const loginSuccess = data => ({ type: LOGIN_SUCCESS, payload: data });
 const logOutSuccess = msg => ({ type: LOGOUT_SUCCESS, payload: msg });
 
+// Fetching user
 export const fetchUser = () => dispatch => {
-	const { isLoggedIn, user, token } = localStorage;
+	let { isLoggedIn, user, token } = localStorage;
 
-	dispatch(gotUser({ isLoggedIn, user, token }));
+	if (isLoggedIn && user && token) {
+		user = JSON.parse(user);
+		dispatch(gotUser({ isLoggedIn, user, token }));
+	}
 };
 
+// Log in
 export const signIn = credential => async dispatch => {
 	try {
 		const res = await axios.post("/api/user/login", credential);
@@ -23,9 +28,11 @@ export const signIn = credential => async dispatch => {
 		const { data, status } = res;
 		const message = { msg: data.msg, status };
 
+		const user = JSON.stringify(data.user);
+
 		localStorage.setItem("token", data.token);
 		localStorage.setItem("isLoggedIn", data.isLoggedIn);
-		localStorage.setItem("user", data.user);
+		localStorage.setItem("user", user);
 
 		dispatch(validUser(data));
 		dispatch(loginSuccess(message));
@@ -37,6 +44,7 @@ export const signIn = credential => async dispatch => {
 	}
 };
 
+// New user sign up
 export const signUp = newUser => async dispatch => {
 	const res = await axios.post("/api/user/signup", newUser);
 	const { data } = res;
@@ -47,8 +55,12 @@ export const signUp = newUser => async dispatch => {
 
 		dispatch(signIn(userInfo));
 	}
+
+	// TODO
+	// Success / Error handling from server
 };
 
+// Log out
 export const logOut = () => dispatch => {
 	localStorage.removeItem("token");
 	localStorage.removeItem("isLoggedIn");
@@ -56,4 +68,7 @@ export const logOut = () => dispatch => {
 
 	dispatch(logOutUser());
 	dispatch(logOutSuccess("Log out successful"));
+
+	// TODO
+	// Success / Error handling from server
 };

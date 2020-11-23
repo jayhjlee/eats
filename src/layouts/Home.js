@@ -13,6 +13,7 @@ import Signup from "./Signup";
 import MapWrapper from "./MapWrapper";
 
 import { signIn, fetchUser, signUp } from "../store/actions/user";
+import { fetchPlaces } from "../store/actions/places";
 
 class Home extends Component {
 	constructor(props) {
@@ -28,12 +29,17 @@ class Home extends Component {
 			firstName: "",
 			lastName: "",
 			email: "",
-			coordinates: [-74.0567, 40.7992],
 		};
 	}
 
 	componentDidMount() {
 		this.props.loadUser();
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.user !== this.props.user) {
+			this.props.fetchRestaurants(this.props.user.location);
+		}
 	}
 
 	handleChange(e) {
@@ -78,7 +84,6 @@ class Home extends Component {
 
 	render() {
 		const { username, password } = this.state;
-		const { user, isLoggedIn, token } = this.props;
 
 		return (
 			<section>
@@ -86,12 +91,7 @@ class Home extends Component {
 					<Switch>
 						<Route exact path="/">
 							<Sidebar />
-							<MapWrapper
-								user={user}
-								isLoggedIn={isLoggedIn}
-								token={token}
-								coordinates={this.state.coordinates}
-							/>
+							<MapWrapper {...this.props} />
 						</Route>
 						<Route
 							path="/log-in"
@@ -125,11 +125,14 @@ class Home extends Component {
 
 const mapStateToProps = state => {
 	const { isLoggedIn, token, user } = state.user;
+	const { restaurants, coordinates } = state.places;
 
 	return {
 		isLoggedIn,
 		token,
 		user,
+		restaurants,
+		coordinates,
 	};
 };
 
@@ -138,6 +141,7 @@ const mapDispatchToProps = dispatch => {
 		loadUser: () => dispatch(fetchUser()),
 		login: credential => dispatch(signIn(credential)),
 		signup: newUser => dispatch(signUp(newUser)),
+		fetchRestaurants: location => dispatch(fetchPlaces(location)),
 	};
 };
 

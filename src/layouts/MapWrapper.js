@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 
 import secrets from "../../secrets";
-
-import { fetchPlaces } from "../store/actions/places";
 
 mapboxgl.accessToken = secrets.mapBoxKey;
 
@@ -13,64 +10,30 @@ class MapWrapper extends Component {
 	constructor(props) {
 		super(props);
 		this.map = React.createRef();
-
-		this.state = {
-			isLoaded: false,
-			restaurants: [],
-			coordinates: [-74.0567, 40.7992],
-		};
-	}
-
-	componentDidMount() {
-		this.map = new mapboxgl.Map({
-			container: "MapContainer",
-			style: "mapbox://styles/mapbox/streets-v11",
-			center: this.state.coordinates,
-			zoom: 15,
-		});
-
-		if (!navigator.geolocation) {
-			alert("Please allow location sharing");
-		} else {
-			navigator.geolocation.getCurrentPosition(position => {
-				const lng = position.coords.longitude;
-				const lat = position.coords.latitude;
-
-				this.props.fetchRestaurants(this.props.user.location);
-				const { restaurants } = this.props;
-
-				this.setState({
-					coordinates: [lng, lat],
-					restaurants,
-				});
-			});
-		}
 	}
 
 	render() {
-		const { isLoggedIn, token, user } = this.props;
+		const { isLoggedIn, token, user, restaurants, coordinates } = this.props;
 		if (!isLoggedIn && !token && !user) return <Redirect to="/log-in" />;
+
+		if (coordinates.length) {
+			this.map = new mapboxgl.Map({
+				container: "MapContainer",
+				style: "mapbox://styles/mapbox/streets-v11",
+				center: coordinates,
+				zoom: 12,
+			});
+		}
 
 		return (
 			<section>
-				<div id="MapContainer" className="mapContainer" />
+				<div className="mapWrapper flex content-even">
+					<div id="MapContainer" className="mapContainer" />
+					<div>list of places</div>
+				</div>
 			</section>
 		);
 	}
 }
 
-const mapStateToProps = state => {
-	const { restaurants } = state.places;
-
-	return {
-		restaurants,
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchRestaurants: location => dispatch(fetchPlaces(location)),
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapWrapper);
+export default MapWrapper;
