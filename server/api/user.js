@@ -49,8 +49,11 @@ router.post("/login", async (req, res) => {
 									});
 								}
 
+								const { username, isActive, location } = user;
+								const userInfo = { username, isActive, location };
+
 								res.status(200).json({
-									user,
+									user: userInfo,
 									isLoggedIn: true,
 									msg: "Successfully logged in",
 									token,

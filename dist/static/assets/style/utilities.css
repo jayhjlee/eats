@@ -5,6 +5,10 @@
 	margin: 0 auto;
 }
 
+.flex {
+	display: flex;
+}
+
 .card {
 	background-color: #fff;
 	color: #333;

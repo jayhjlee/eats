@@ -11,7 +11,7 @@ class Sidebar extends Component {
 			<section>
 				<div className="sidebar">
 					<div className="flex">
-						<ul className="main-menu mt-1">
+						<ul className="main-menu">
 							<li>
 								<span className="sidebar-item">
 									<i className="fas fa-list"></i>&nbsp;&nbsp;View

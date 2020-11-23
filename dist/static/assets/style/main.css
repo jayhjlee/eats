@@ -201,6 +201,10 @@ h2 {
 	padding-left: 8rem;
 }
 
+.mapWrapper .content-even {
+	justify-content: space-evenly;
+}
+
 .mapContainer {
 	position: absolute;
 	width: 50%;
