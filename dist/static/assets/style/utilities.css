@@ -9,6 +9,10 @@
 	display: flex;
 }
 
+.wrap {
+	flex-wrap: wrap;
+}
+
 .card {
 	background-color: #fff;
 	color: #333;
@@ -37,6 +41,20 @@
 .btn-outline {
 	background-color: transparent;
 	border: 1px solid #fff;
+}
+
+/* Width */
+
+.full-width {
+	width: 100%;
+}
+
+.half-width {
+	width: 50%;
+}
+
+.third-width {
+	width: 30%;
 }
 
 /* Margin */

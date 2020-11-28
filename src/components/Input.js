@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const Input = ({ type, label, name, action, value }) => {
+const Input = ({ type, label, name, action, value, classes }) => {
 	return (
-		<div className="form-control">
+		<div className={classes ? "form-control " + classes : "form-control"}>
 			<label className="py-2">{label ? label : null}</label>
 			<input
 				name={name}
