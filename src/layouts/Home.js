@@ -11,6 +11,7 @@ import Login from "./Login";
 import Sidebar from "./Sidebar";
 import Signup from "./Signup";
 import MapWrapper from "./MapWrapper";
+import Places from "./Places";
 
 import { signIn, fetchUser, signUp } from "../store/actions/user";
 import { fetchPlaces } from "../store/actions/places";
@@ -36,11 +37,11 @@ class Home extends Component {
 		this.props.loadUser();
 	}
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.user !== this.props.user) {
-			this.props.fetchRestaurants(this.props.user.location);
-		}
-	}
+	// componentDidUpdate(prevProps) {
+	// 	if (prevProps.user !== this.props.user) {
+	// 		this.props.fetchRestaurants(this.props.user.location);
+	// 	}
+	// }
 
 	handleChange(e) {
 		this.setState({
@@ -90,8 +91,9 @@ class Home extends Component {
 				<Router>
 					<Switch>
 						<Route exact path="/">
-							<Sidebar />
-							<MapWrapper {...this.props} />
+							{/* <Sidebar /> */}
+							{/* <MapWrapper {...this.props} /> */}
+							<Places {...this.props} />
 						</Route>
 						<Route
 							path="/log-in"

@@ -129,9 +129,10 @@ h2 {
 .sign-up-form {
 	margin: auto;
 	top: 30%;
-	width: 20%;
+	width: 50%;
 	height: 50%;
 	margin-top: 5%;
+	margin-bottom: 5%;
 }
 
 .login-form .form-control,
