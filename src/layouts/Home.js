@@ -13,7 +13,6 @@ import Places from "./Places";
 import AddPlaceForm from "./AddPlaceForm";
 
 import { signIn, fetchUser, signUp } from "../store/actions/user";
-import { fetchPlaces } from "../store/actions/places";
 
 class Home extends Component {
 	constructor(props) {
@@ -119,14 +118,11 @@ class Home extends Component {
 
 const mapStateToProps = state => {
 	const { isLoggedIn, token, user } = state.user;
-	const { restaurants, coordinates } = state.places;
 
 	return {
 		isLoggedIn,
 		token,
 		user,
-		restaurants,
-		coordinates,
 	};
 };
 

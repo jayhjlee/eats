@@ -1,8 +1,42 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import Input from "../components/Input";
+import Button from "../components/Button";
+
+import { registerPlace } from "../store/actions/places";
 
 class AddPlaceForm extends Component {
+	constructor(props) {
+		super(props);
+
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+
+		this.state = {
+			name: "",
+			address1: "",
+			address2: "",
+			city: "",
+			postalCode: "",
+			country: "",
+		};
+	}
+
+	handleChange(e) {
+		this.setState({
+			[e.target.name]: e.target.value,
+		});
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+		this.props.addPlace(this.state);
+	}
+
 	render() {
+		const { name, address1, address2, city, postalCode, country } = this.state;
+
 		return (
 			<div className="add-place-form">
 				<div className="card">
@@ -10,24 +44,46 @@ class AddPlaceForm extends Component {
 						<Input
 							classes="full-width"
 							label="Name"
-							value="ABC Napoli"
-							action={() => console.log("hello")}
-							name="example"
+							value={name}
+							action={this.handleChange}
+							name="name"
 						/>
 						<Input
 							classes="half-width"
-							label="Name"
-							value="ABC Napoli"
-							action={() => console.log("hello")}
-							name="example"
+							label="Address 1"
+							value={address1}
+							action={this.handleChange}
+							name="address1"
 						/>
 						<Input
 							classes="half-width"
-							label="Name"
-							value="ABC Napoli"
-							action={() => console.log("hello")}
-							name="example"
+							label="Address 2"
+							value={address2}
+							action={this.handleChange}
+							name="address2"
 						/>
+						<Input
+							classes="third-width"
+							label="City"
+							value={city}
+							action={this.handleChange}
+							name="city"
+						/>
+						<Input
+							classes="third-width"
+							label="Postal Code"
+							value={postalCode}
+							action={this.handleChange}
+							name="postalCode"
+						/>
+						<Input
+							classes="third-width"
+							label="Country"
+							value={country}
+							action={this.handleChange}
+							name="country"
+						/>
+						<Button action={this.handleSubmit} innerText="Add Place" />
 					</form>
 				</div>
 			</div>
@@ -35,4 +91,10 @@ class AddPlaceForm extends Component {
 	}
 }
 
-export default AddPlaceForm;
+const mapDispatchToProps = dispatch => {
+	return {
+		addPlace: placeInfo => dispatch(registerPlace(placeInfo)),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(AddPlaceForm);
