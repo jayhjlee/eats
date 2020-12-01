@@ -1,49 +1,24 @@
 const router = require("express").Router();
-const axios = require("axios");
-const secrets = require("../../secrets");
+const Place = require("../db/places");
 
-router.get("/restaurants/location", async (req, res) => {
+router.post("/addPlace", async (req, res) => {
 	try {
-		const { apiKey } = secrets;
-		const { city, limit } = req.query;
+		const newPlace = await Place.create(req.body);
 
-		let numOfRestaurants = limit;
-
-		if (!numOfRestaurants) {
-			numOfRestaurants = 20;
+		if (newPlace) {
+			res.status(201).send({
+				isSuccess: true,
+				msg: "Place added",
+				status: 201,
+				error: {},
+			});
 		}
-		const response = await axios.get(
-			`https://api.yelp.com/v3/businesses/search?location=${city}&limit=${numOfRestaurants}`,
-			{
-				headers: {
-					Authorization: `Bearer ${apiKey}`,
-				},
-			}
-		);
-		res.json(response.data);
 	} catch (err) {
-		res.json(err);
-	}
-});
-
-router.get("/restaurants/phone", async (req, res) => {
-	const { apiKey } = secrets;
-
-	const { phoneNumber } = req.query;
-
-	try {
-		const response = await axios.get(
-			`https://api.yelp.com/v3/businesses/search/phone?phone=+1${phoneNumber}`,
-			{
-				headers: {
-					Authorization: `Bearer ${apiKey}`,
-				},
-			}
-		);
-
-		res.json(response.data);
-	} catch (err) {
-		res.json(err);
+		res.status(500).send({
+			isSuccess: true,
+			msg: err.message,
+			error: err,
+		});
 	}
 });
 

@@ -1,5 +1,5 @@
 .container {
-	width: 100%;
+	width: 80%;
 	padding: 0 40px;
 	overflow: auto;
 	margin: 0 auto;
@@ -7,6 +7,10 @@
 
 .flex {
 	display: flex;
+}
+
+.wrap {
+	flex-wrap: wrap;
 }
 
 .card {
@@ -37,6 +41,24 @@
 .btn-outline {
 	background-color: transparent;
 	border: 1px solid #fff;
+}
+
+/* Width */
+
+.full-width {
+	width: 100%;
+}
+
+.half-width {
+	width: 45%;
+}
+
+.third-width {
+	width: 30%;
+}
+
+.fifth-width {
+	width: 20%;
 }
 
 /* Margin */

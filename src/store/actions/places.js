@@ -1,26 +1,14 @@
 import axios from "axios";
-import { FETCH_PLACES, SET_COORDINATES } from "../types/places";
+import { ADDED_PLACE } from "../types/messages";
 
-const gotPlaces = businesses => ({ type: FETCH_PLACES, payload: businesses });
-const setCoordinates = coordinates => ({
-	type: SET_COORDINATES,
-	payload: coordinates,
-});
+const addPlace = data => ({ type: ADDED_PLACE, payload: data });
 
-export const fetchPlaces = location => async dispatch => {
+export const registerPlace = place => async dispatch => {
 	try {
-		const res = await axios.get(
-			`/api/places/restaurants/location?city=${location}`
-		);
-		const {
-			data: {
-				businesses,
-				region: { center },
-			},
-		} = res;
+		const res = await axios.post(`/api/places/addPlace`, place);
+		const { data } = res;
 
-		dispatch(gotPlaces(businesses));
-		dispatch(setCoordinates(center));
+		dispatch(addPlace(data));
 	} catch (err) {
 		console.error(err);
 	}
