@@ -18,6 +18,7 @@ class AddPlaceForm extends Component {
 			address1: "",
 			address2: "",
 			city: "",
+			state: "",
 			postalCode: "",
 			country: "",
 		};
@@ -35,7 +36,15 @@ class AddPlaceForm extends Component {
 	}
 
 	render() {
-		const { name, address1, address2, city, postalCode, country } = this.state;
+		const {
+			name,
+			address1,
+			address2,
+			city,
+			state,
+			postalCode,
+			country,
+		} = this.state;
 
 		return (
 			<div className="add-place-form">
@@ -63,27 +72,34 @@ class AddPlaceForm extends Component {
 							name="address2"
 						/>
 						<Input
-							classes="third-width"
+							classes="fifth-width"
 							label="City"
 							value={city}
 							action={this.handleChange}
 							name="city"
 						/>
 						<Input
-							classes="third-width"
+							classes="fifth-width"
+							label="State"
+							value={state}
+							action={this.handleChange}
+							name="state"
+						/>
+						<Input
+							classes="fifth-width"
 							label="Postal Code"
 							value={postalCode}
 							action={this.handleChange}
 							name="postalCode"
 						/>
 						<Input
-							classes="third-width"
+							classes="fifth-width"
 							label="Country"
 							value={country}
 							action={this.handleChange}
 							name="country"
 						/>
-						<Button action={this.handleSubmit} innerText="Add Place" />
+						<Button action={this.handleSubmit} innerText="Add" />
 					</form>
 				</div>
 			</div>

@@ -5,13 +5,10 @@ const Place = db.define("place", {
 	name: {
 		type: DataTypes.STRING,
 	},
-	addressLineOne: {
+	address1: {
 		type: DataTypes.STRING,
 	},
-	addressLineTwo: {
-		type: DataTypes.STRING,
-	},
-	addressLineThree: {
+	address2: {
 		type: DataTypes.STRING,
 	},
 	city: {

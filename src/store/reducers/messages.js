@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../types/messages";
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, ADDED_PLACE } from "../types/messages";
 
 const initialState = {
 	msg: "",
@@ -18,6 +18,12 @@ export default function (state = initialState, action) {
 				...state,
 				msg: action.payload,
 				status: null,
+			};
+		case ADDED_PLACE:
+			return {
+				...state,
+				msg: action.payload.msg,
+				status: action.payload.status,
 			};
 		default:
 			return state;

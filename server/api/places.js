@@ -1,9 +1,25 @@
 const router = require("express").Router();
-const axios = require("axios");
-const secrets = require("../../secrets");
+const Place = require("../db/places");
 
 router.post("/addPlace", async (req, res) => {
-	console.log(req.body);
+	try {
+		const newPlace = await Place.create(req.body);
+
+		if (newPlace) {
+			res.status(201).send({
+				isSuccess: true,
+				msg: "Place added",
+				status: 201,
+				error: {},
+			});
+		}
+	} catch (err) {
+		res.status(500).send({
+			isSuccess: true,
+			msg: err.message,
+			error: err,
+		});
+	}
 });
 
 module.exports = router;
