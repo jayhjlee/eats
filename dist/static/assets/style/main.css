@@ -36,6 +36,10 @@ h2 {
 	margin: 10px 0;
 }
 
+label {
+	font-size: 0.8rem;
+}
+
 /* Navbar */
 .navbar {
 	display: flex;
@@ -53,7 +57,7 @@ h2 {
 .navbar li {
 	display: flex;
 	flex-direction: column;
-	font-size: 1.2rem;
+	font-size: 1rem;
 }
 
 .navbar h1 {
@@ -146,8 +150,27 @@ h2 {
 }
 
 /* Add Place Form */
-.add-place-form .form-control {
-	margin: 30px 10px;
+.add-place-form {
+	width: 60%;
+	margin: auto;
+}
+
+.add-place-form .title {
+	padding: 10px 0;
+}
+
+.add-place-form .grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 5rem;
+	column-gap: 1%;
+}
+
+.add-place-form .name,
+.add-place-form .address1,
+.add-place-form .address2,
+.add-place-form .add-place-btn {
+	grid-column: 1 / span 2;
 }
 
 .add-place-form input[type="text"] {

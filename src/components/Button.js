@@ -1,8 +1,10 @@
 import React from "react";
 
-const Button = ({ action, innerText }) => {
+const Button = ({ action, innerText, classes }) => {
 	return (
-		<button onClick={action} className="btn btn-primary">
+		<button
+			onClick={action}
+			className={classes ? classes + " btn btn-primary" : "btn btn-primary"}>
 			<p>{innerText ? innerText : null}</p>
 		</button>
 	);

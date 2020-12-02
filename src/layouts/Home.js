@@ -83,7 +83,7 @@ class Home extends Component {
 				<Router>
 					<Switch>
 						<Route exact path="/">
-							<AddPlaceForm />
+							<AddPlaceForm {...this.props} />
 							<Places {...this.props} />
 						</Route>
 						<Route

@@ -5,6 +5,13 @@
 	margin: 0 auto;
 }
 
+.container-fluid {
+	width: 100%;
+	padding: 0 40px;
+	overflow: auto;
+	margin: 0 auto;
+}
+
 .flex {
 	display: flex;
 }
