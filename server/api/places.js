@@ -3,7 +3,16 @@ const Place = require("../db/places");
 
 router.post("/addPlace", async (req, res) => {
 	try {
-		const newPlace = await Place.create(req.body);
+		const place = {};
+		const keys = Object.keys(req.body);
+
+		keys.forEach(key => {
+			if (!place[key]) {
+				place[key] = req.body[key].value;
+			}
+		});
+
+		const newPlace = await Place.create(place);
 
 		if (newPlace) {
 			res.status(201).send({
