@@ -22,6 +22,7 @@ class AddPlaceForm extends Component {
 			state: "",
 			postalCode: "",
 			country: "",
+			phone: "",
 		};
 	}
 
@@ -45,6 +46,7 @@ class AddPlaceForm extends Component {
 			state,
 			postalCode,
 			country,
+			phone,
 		} = this.state;
 
 		const { isLoggedIn, token, user } = this.props;
@@ -53,10 +55,15 @@ class AddPlaceForm extends Component {
 		return (
 			<div className="add-place-form">
 				<div className="card">
-					<h2 className="title">Add Place</h2>
+					<div className="flex d-content-between">
+						<h2 className="title">Add Place</h2>
+						<p className="required">* Required</p>
+					</div>
+
 					<form className="grid">
 						<Input
 							classes="name"
+							required={true}
 							label="Name"
 							value={name}
 							action={this.handleChange}
@@ -64,6 +71,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="address1"
+							required={true}
 							label="Address 1"
 							value={address1}
 							action={this.handleChange}
@@ -71,6 +79,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="address2"
+							required={true}
 							label="Address 2"
 							value={address2}
 							action={this.handleChange}
@@ -78,6 +87,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="city"
+							required={true}
 							label="City"
 							value={city}
 							action={this.handleChange}
@@ -85,6 +95,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="state"
+							required={true}
 							label="State"
 							value={state}
 							action={this.handleChange}
@@ -92,6 +103,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="postal"
+							required={true}
 							label="Postal Code"
 							value={postalCode}
 							action={this.handleChange}
@@ -103,6 +115,14 @@ class AddPlaceForm extends Component {
 							value={country}
 							action={this.handleChange}
 							name="country"
+						/>
+						<Input
+							classes="phone"
+							required={true}
+							label="Phone"
+							value={phone}
+							action={this.handleChange}
+							name="phone"
 						/>
 						<Button
 							classes="add-place-btn"
