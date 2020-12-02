@@ -176,6 +176,7 @@ label {
 .add-place-form .name,
 .add-place-form .address1,
 .add-place-form .address2,
+.add-place-form .phone,
 .add-place-form .add-place-btn {
 	grid-column: 1 / span 2;
 }

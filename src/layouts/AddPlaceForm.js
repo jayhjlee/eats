@@ -22,6 +22,7 @@ class AddPlaceForm extends Component {
 			state: "",
 			postalCode: "",
 			country: "",
+			phone: "",
 		};
 	}
 
@@ -45,6 +46,7 @@ class AddPlaceForm extends Component {
 			state,
 			postalCode,
 			country,
+			phone,
 		} = this.state;
 
 		const { isLoggedIn, token, user } = this.props;
@@ -61,7 +63,7 @@ class AddPlaceForm extends Component {
 					<form className="grid">
 						<Input
 							classes="name"
-							asterisk={true}
+							required={true}
 							label="Name"
 							value={name}
 							action={this.handleChange}
@@ -69,7 +71,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="address1"
-							asterisk={true}
+							required={true}
 							label="Address 1"
 							value={address1}
 							action={this.handleChange}
@@ -77,7 +79,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="address2"
-							asterisk={true}
+							required={true}
 							label="Address 2"
 							value={address2}
 							action={this.handleChange}
@@ -85,7 +87,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="city"
-							asterisk={true}
+							required={true}
 							label="City"
 							value={city}
 							action={this.handleChange}
@@ -93,7 +95,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="state"
-							asterisk={true}
+							required={true}
 							label="State"
 							value={state}
 							action={this.handleChange}
@@ -101,7 +103,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="postal"
-							asterisk={true}
+							required={true}
 							label="Postal Code"
 							value={postalCode}
 							action={this.handleChange}
@@ -113,6 +115,14 @@ class AddPlaceForm extends Component {
 							value={country}
 							action={this.handleChange}
 							name="country"
+						/>
+						<Input
+							classes="phone"
+							required={true}
+							label="Phone"
+							value={phone}
+							action={this.handleChange}
+							name="phone"
 						/>
 						<Button
 							classes="add-place-btn"
