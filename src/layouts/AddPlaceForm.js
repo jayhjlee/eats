@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -46,60 +47,68 @@ class AddPlaceForm extends Component {
 			country,
 		} = this.state;
 
+		const { isLoggedIn, token, user } = this.props;
+		if (!isLoggedIn && !token && !user) return <Redirect to="/log-in" />;
+
 		return (
 			<div className="add-place-form">
 				<div className="card">
-					<form className="flex wrap">
+					<h2 className="title">Add Place</h2>
+					<form className="grid">
 						<Input
-							classes="full-width"
+							classes="name"
 							label="Name"
 							value={name}
 							action={this.handleChange}
 							name="name"
 						/>
 						<Input
-							classes="half-width"
+							classes="address1"
 							label="Address 1"
 							value={address1}
 							action={this.handleChange}
 							name="address1"
 						/>
 						<Input
-							classes="half-width"
+							classes="address2"
 							label="Address 2"
 							value={address2}
 							action={this.handleChange}
 							name="address2"
 						/>
 						<Input
-							classes="fifth-width"
+							classes="city"
 							label="City"
 							value={city}
 							action={this.handleChange}
 							name="city"
 						/>
 						<Input
-							classes="fifth-width"
+							classes="state"
 							label="State"
 							value={state}
 							action={this.handleChange}
 							name="state"
 						/>
 						<Input
-							classes="fifth-width"
+							classes="postal"
 							label="Postal Code"
 							value={postalCode}
 							action={this.handleChange}
 							name="postalCode"
 						/>
 						<Input
-							classes="fifth-width"
+							classes="country"
 							label="Country"
 							value={country}
 							action={this.handleChange}
 							name="country"
 						/>
-						<Button action={this.handleSubmit} innerText="Add" />
+						<Button
+							classes="add-place-btn"
+							action={this.handleSubmit}
+							innerText="Add"
+						/>
 					</form>
 				</div>
 			</div>
