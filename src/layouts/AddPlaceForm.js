@@ -53,10 +53,15 @@ class AddPlaceForm extends Component {
 		return (
 			<div className="add-place-form">
 				<div className="card">
-					<h2 className="title">Add Place</h2>
+					<div className="flex d-content-between">
+						<h2 className="title">Add Place</h2>
+						<p className="required">* Required</p>
+					</div>
+
 					<form className="grid">
 						<Input
 							classes="name"
+							asterisk={true}
 							label="Name"
 							value={name}
 							action={this.handleChange}
@@ -64,6 +69,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="address1"
+							asterisk={true}
 							label="Address 1"
 							value={address1}
 							action={this.handleChange}
@@ -71,6 +77,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="address2"
+							asterisk={true}
 							label="Address 2"
 							value={address2}
 							action={this.handleChange}
@@ -78,6 +85,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="city"
+							asterisk={true}
 							label="City"
 							value={city}
 							action={this.handleChange}
@@ -85,6 +93,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="state"
+							asterisk={true}
 							label="State"
 							value={state}
 							action={this.handleChange}
@@ -92,6 +101,7 @@ class AddPlaceForm extends Component {
 						/>
 						<Input
 							classes="postal"
+							asterisk={true}
 							label="Postal Code"
 							value={postalCode}
 							action={this.handleChange}

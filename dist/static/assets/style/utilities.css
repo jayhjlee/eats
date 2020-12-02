@@ -16,6 +16,18 @@
 	display: flex;
 }
 
+.d-content-around {
+	justify-content: space-around;
+}
+
+.d-content-between {
+	justify-content: space-between;
+}
+
+.d-content-evenly {
+	justify-content: space-evenly;
+}
+
 .wrap {
 	flex-wrap: wrap;
 }

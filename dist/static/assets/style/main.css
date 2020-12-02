@@ -159,6 +159,13 @@ label {
 	padding: 10px 0;
 }
 
+.add-place-form .required {
+	line-height: 6;
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: var(--error-color);
+}
+
 .add-place-form .grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
