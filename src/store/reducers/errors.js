@@ -1,4 +1,4 @@
-import { GET_ERRORS, CLEAR_ERRORS } from "../types/errors";
+import { GET_ERRORS, INVALID_FIELDS } from "../types/errors";
 
 const initialState = {
 	msg: "",
@@ -12,6 +12,12 @@ export default function (state = initialState, action) {
 				...state,
 				msg: action.payload.msg,
 				status: action.payload.status,
+			};
+		case INVALID_FIELDS:
+			return {
+				...state,
+				msg: `Following fields are required: ${action.payload.join(", ")}`,
+				status: null,
 			};
 		default:
 			return state;

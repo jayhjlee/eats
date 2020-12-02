@@ -12,7 +12,6 @@ const Place = db.define("place", {
 	},
 	address2: {
 		type: DataTypes.STRING,
-		allowNull: false,
 	},
 	city: {
 		type: DataTypes.STRING,
